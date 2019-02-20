@@ -25,7 +25,7 @@ const findAliasReplacements = (url, aliases = []) => {
   if (!isEmpty(aliasReplacements)) return aliasReplacements;
 };
 
-const routeMatchesRequest = (route, req, options) => {
+const routeMatchesRequest = (route, req, options = {}) => {
   const { aliases } = options;
 
   if (!isEqualMethod(req.method, route.method)) return false;
