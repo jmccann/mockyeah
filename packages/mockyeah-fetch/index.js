@@ -29,14 +29,20 @@ global.fetch = (input, init) => {
     headers
   };
 
-  console.log("ADJ matchReq", matchReq);
+  // console.log("ADJ matchReq", matchReq);
 
-  const match = mocks.some(mock => {
-    console.log("ADJ mock", mock);
-    routeMatchesRequest(mock, matchReq);
+  const matchedRoute = mocks.find(mock => {
+    // console.log("ADJ mock", mock);
+    return routeMatchesRequest(mock, matchReq);
   });
 
-  console.log("ADJ match", match);
+  // console.log("ADJ matchedRoute", matchedRoute);
+
+  if (matchedRoute) {
+    return Promise.resolve({
+      json: () => Promise.resolve(matchedRoute.originalResponse.json)
+    });
+  }
 
   return originalFetch(req);
 };

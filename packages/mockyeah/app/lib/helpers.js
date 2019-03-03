@@ -154,7 +154,8 @@ const handlePathTypes = (_path, _query) => {
 const compileRoute = (match, response) => {
   const route = {
     method: match.method || 'get',
-    response
+    response,
+    originalResponse: response
   };
 
   if (!_.isFunction(response)) {
