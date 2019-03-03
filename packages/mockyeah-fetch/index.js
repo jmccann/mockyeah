@@ -1,5 +1,4 @@
 require("isomorphic-fetch");
-const { parse } = require("url");
 const routeMatchesRequest = require("mockyeah/app/lib/routeMatchesRequest");
 const { compileRoute } = require("mockyeah/app/lib/helpers");
 
@@ -13,7 +12,14 @@ const originalFetch = global.fetch;
 global.fetch = (input, init) => {
   const req = input instanceof Request ? input : new Request(input, init);
 
-  const { method, url } = req;
+  const { method, url, body: _body } = req;
+
+  let body;
+  try {
+    body = _body && JSON.parse(_body);
+  } catch (err) {
+    body = _body;
+  }
 
   const myURL = new URL(url);
 
@@ -26,17 +32,13 @@ global.fetch = (input, init) => {
     method,
     url: `/${url}`,
     query,
+    body,
     headers
   };
 
-  // console.log("ADJ matchReq", matchReq);
-
   const matchedRoute = mocks.find(mock => {
-    // console.log("ADJ mock", mock);
     return routeMatchesRequest(mock, matchReq);
   });
-
-  // console.log("ADJ matchedRoute", matchedRoute);
 
   if (matchedRoute) {
     return Promise.resolve({
@@ -44,7 +46,7 @@ global.fetch = (input, init) => {
     });
   }
 
-  return originalFetch(req);
+  return originalFetch(req, init);
 };
 
 module.exports = _mocks => {

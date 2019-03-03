@@ -50,7 +50,9 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "chai": "^4.2.0",
     "isomorphic-fetch": "^2.2.1",
+    "mocha": "^6.0.2",
     "mockyeah": "^0.21.0-alpha.0"
   },
   "engines": {
