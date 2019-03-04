@@ -50,5 +50,10 @@ global.fetch = (input, init) => {
 };
 
 module.exports = _mocks => {
-  mocks = _mocks.map(mock => compileRoute(...mock));
+  mocks = [
+    ...mocks,
+    ...(Array.isArray(_mocks) ? _mocks : [_mocks]).map(mock =>
+      compileRoute(...mock)
+    )
+  ];
 };
