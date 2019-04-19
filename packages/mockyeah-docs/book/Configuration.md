@@ -21,7 +21,12 @@
   "httpsKeyPath": undefined,
   "recordToFixtures": true,
   "recordToFixturesMode": "path",
-  "formatScript": undefined
+  "formatScript": undefined,
+  "watch": false,
+  "responseHeaders": true,
+  "groups": {},
+  "suiteHeader": "x-mockyeah-suite",
+  "suiteCookie": "mockyeahSuite"
 }
 ```
 
@@ -62,6 +67,8 @@ Also supports a `.mockyeah.js` as a Node module that exports a JavaScript object
 
 - `verbose`: Boolean to toggle verbosity of mockyeah generated output.
 - `proxy`: Boolean to enable a proxy on startup.
+- `suiteHeader`: String for the header name to use to opt-in to suites dynamically.
+- `suiteCookie`: String for the cookie name to use to opt-in to suites dynamically.
 
 The proxy will transparently forward all non-matching requests onto their original URL.
 
