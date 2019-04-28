@@ -4,7 +4,8 @@
   "description": "A powerful service mocking, recording, and playback utility.",
   "main": "index.js",
   "bin": {
-    "mockyeah": "./bin/index.js"
+    "mockyeah": "./bin/index.js",
+    "mockyeah-cli": "./bin/index.js"
   },
   "preferGlobal": true,
   "scripts": {
